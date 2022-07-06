@@ -24,4 +24,3 @@ for (const repo of repos) {
 
 prCache.set(`pulls`, pullsByRepo, 10000);
 const prs = prCache.get(`pulls`);
-console.log(prs);
