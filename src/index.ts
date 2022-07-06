@@ -3,7 +3,7 @@ import cache from "node-cache";
 
 const pullsByRepo: { [key: string]: any } = {};
 const prCache = new cache();
-const githubToken = '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';
+const githubToken = ''; // Enter personal access token here
 let nPulls = 0;
 
 const reposResponse = await fetch('https://api.github.com/orgs/ramda/repos', { 
