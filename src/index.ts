@@ -4,7 +4,6 @@ import cache from "node-cache";
 const pullsByRepo: { [key: string]: any } = {};
 const prCache = new cache();
 const githubToken = ''; // Enter personal access token here
-let nPulls = 0;
 
 const reposResponse = await fetch('https://api.github.com/orgs/ramda/repos', { 
   headers: {
@@ -20,11 +19,9 @@ for (const repo of repos) {
       'Authorization': `Bearer ${githubToken}`,
     }});
   const pulls = await pullsResponse.json();
-  nPulls += pulls.length;
   pullsByRepo[repo.name] = pulls;
 }
 
-const success = prCache.set(`prs`, pullsByRepo, 10000);
-const prs = prCache.get(`prs`);
+prCache.set(`pulls`, pullsByRepo, 10000);
+const prs = prCache.get(`pulls`);
 console.log(prs);
-console.log(nPulls);
